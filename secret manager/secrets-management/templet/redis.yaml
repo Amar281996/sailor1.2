@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-events
+spec:
+  volumes:
+  - name: event-volume
+    hostPath:
+      path: "/secrets-management/event.txt"
+  containers:
+  - image: nginx
+    name: event-containers
+    volumeMounts:
+    - mountPath: "/tmp/"
+      name: event-volume
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-email
+  labels:
+     zone: pod
+     version: v1
+spec:
+  volumes:
+  - name: email-volume
+    hostPath:
+      path: "/secrets-management/emai.txt"
+  containers:
+  - image: nginx
+    name: email-containers
+    volumeMounts:
+    - mountPath: "/tmp/"
+      name: email-volume
+  
+    
